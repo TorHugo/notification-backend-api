@@ -1,0 +1,19 @@
+package com.dev.notification.backend.api.infrastructure.repository.mapper
+
+import com.dev.notification.backend.api.domain.entity.AuthorityToUserDomain
+import com.dev.notification.backend.api.infrastructure.repository.models.AuthorityToUserEntity
+import com.dev.notification.backend.api.infrastructure.repository.models.CompositeKey
+
+object AuthorityToUserEntityMapper {
+    private fun fromAggregate(domain: AuthorityToUserDomain): AuthorityToUserEntity {
+        val compositeKey = CompositeKey(domain.getUserIdentifier(), domain.getAuthorityIdentifier())
+        return AuthorityToUserEntity(
+            compositeKey,
+            domain.createdAt
+        )
+    }
+
+    fun fromAggregate(domains: List<AuthorityToUserDomain>) : List<AuthorityToUserEntity> {
+        return domains.map { domain -> this.fromAggregate(domain)}
+    }
+}
