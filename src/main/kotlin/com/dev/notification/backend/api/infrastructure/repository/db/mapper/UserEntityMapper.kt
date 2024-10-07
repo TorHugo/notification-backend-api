@@ -1,7 +1,7 @@
-package com.dev.notification.backend.api.infrastructure.repository.mapper
+package com.dev.notification.backend.api.infrastructure.repository.db.mapper
 
 import com.dev.notification.backend.api.domain.entity.UserDomain
-import com.dev.notification.backend.api.infrastructure.repository.models.UserEntity
+import com.dev.notification.backend.api.infrastructure.repository.db.models.UserEntity
 
 object UserEntityMapper {
     fun fromAggregate(domain: UserDomain): UserEntity {

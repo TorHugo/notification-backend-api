@@ -1,4 +1,4 @@
-package com.dev.notification.backend.api.infrastructure.repository.models
+package com.dev.notification.backend.api.infrastructure.repository.db.models
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Id

@@ -3,8 +3,8 @@ package com.dev.notification.backend.api.infrastructure.gateway
 import com.dev.notification.backend.api.domain.entity.UserDomain
 import com.dev.notification.backend.api.domain.exception.template.GatewayException
 import com.dev.notification.backend.api.domain.gateway.UserGateway
-import com.dev.notification.backend.api.infrastructure.repository.UserRepository
-import com.dev.notification.backend.api.infrastructure.repository.mapper.UserEntityMapper
+import com.dev.notification.backend.api.infrastructure.repository.db.UserRepository
+import com.dev.notification.backend.api.infrastructure.repository.db.mapper.UserEntityMapper
 import org.springframework.stereotype.Component
 
 @Component

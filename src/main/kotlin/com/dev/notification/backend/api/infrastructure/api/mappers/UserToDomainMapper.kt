@@ -1,4 +1,4 @@
-package com.dev.notification.backend.api.infrastructure.mappers
+package com.dev.notification.backend.api.infrastructure.api.mappers
 
 import com.dev.notification.backend.api.domain.entity.UserDomain
 import com.dev.notification.backend.api.infrastructure.api.dto.request.SignInUserDTO

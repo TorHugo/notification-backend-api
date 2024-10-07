@@ -1,8 +1,7 @@
 package com.dev.notification.backend.api.domain.service
 
-import com.dev.notification.backend.api.infrastructure.api.dto.request.SignInUserDTO
-import com.dev.notification.backend.api.infrastructure.api.dto.response.UserSuccessfullyDTO
+import com.dev.notification.backend.api.domain.entity.UserDomain
 
 interface SignInService {
-    fun execute(entry: SignInUserDTO) : UserSuccessfullyDTO
+    fun execute(domain: UserDomain) : String
 }

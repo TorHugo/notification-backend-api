@@ -1,6 +1,6 @@
-package com.dev.notification.backend.api.infrastructure.repository
+package com.dev.notification.backend.api.infrastructure.repository.db
 
-import com.dev.notification.backend.api.infrastructure.repository.models.UserEntity
+import com.dev.notification.backend.api.infrastructure.repository.db.models.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

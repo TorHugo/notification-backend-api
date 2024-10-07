@@ -1,7 +1,7 @@
-package com.dev.notification.backend.api.infrastructure.repository.mapper
+package com.dev.notification.backend.api.infrastructure.repository.db.mapper
 
 import com.dev.notification.backend.api.domain.entity.AuthorityDomain
-import com.dev.notification.backend.api.infrastructure.repository.models.AuthorityEntity
+import com.dev.notification.backend.api.infrastructure.repository.db.models.AuthorityEntity
 
 object AuthorityEntityMapper {
     fun toAggregate(entity: AuthorityEntity): AuthorityDomain {

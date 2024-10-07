@@ -2,8 +2,8 @@ package com.dev.notification.backend.api.infrastructure.gateway
 
 import com.dev.notification.backend.api.domain.entity.AuthorityToUserDomain
 import com.dev.notification.backend.api.domain.gateway.AuthorityToUserGateway
-import com.dev.notification.backend.api.infrastructure.repository.AuthorityToUserRepository
-import com.dev.notification.backend.api.infrastructure.repository.mapper.AuthorityToUserEntityMapper
+import com.dev.notification.backend.api.infrastructure.repository.db.AuthorityToUserRepository
+import com.dev.notification.backend.api.infrastructure.repository.db.mapper.AuthorityToUserEntityMapper
 import org.springframework.stereotype.Component
 
 @Component

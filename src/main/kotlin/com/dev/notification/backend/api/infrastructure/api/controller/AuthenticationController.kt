@@ -10,19 +10,24 @@ import com.dev.notification.backend.api.infrastructure.api.dto.response.DefaultD
 import com.dev.notification.backend.api.infrastructure.api.dto.response.DefaultMessageDTO
 import com.dev.notification.backend.api.infrastructure.api.dto.response.UserSuccessfullyDTO
 import com.dev.notification.backend.api.infrastructure.api.dto.response.ValidTokenDTO
+import com.dev.notification.backend.api.infrastructure.api.mappers.UserToDomainMapper
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class AuthenticationController(
     private val login: Login,
     private val logout: Logout,
+    private val encoder: PasswordEncoder,
     private val signIn: SignInService
 ) : AuthenticationAPI {
 
     override fun signIn(entry: SignInUserDTO): DefaultDTO<UserSuccessfullyDTO> {
-        return DefaultDTO.created(signIn.execute(entry))
+        val encryptedPassword = encoder.encode(entry.password)
+        val userDomain = UserToDomainMapper.toUserDomain(entry, encryptedPassword)
+        return DefaultDTO.created(UserSuccessfullyDTO(signIn.execute(userDomain)))
     }
 
     override fun login(entry: LoginUserDTO): ResponseEntity<DefaultDTO<DefaultMessageDTO>> {
