@@ -13,21 +13,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Java
-        uses: actions/setup-java@v2
-        with:
-          java-version: '21'
-          distribution: 'adopt'
-
-      - name: Install ktlint
-        uses: mibolton/ktlint-action@v1.5.0
-        with:
-          version: 'latest'
-
       - name: Run ktlint
-        run: |
-          echo "Running ktlint..."
-          ktlint --reporter plain .
+        uses: lucasnlm/ktlint-action@v1.0.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          level: warning
+          filter_mode: added
+          ktlint_version: latest
 
       - name: Create new branch and PR
         env:
