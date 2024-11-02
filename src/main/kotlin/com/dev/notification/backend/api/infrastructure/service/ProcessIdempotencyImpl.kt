@@ -3,7 +3,7 @@ package com.dev.notification.backend.api.infrastructure.service
 import com.dev.notification.backend.api.application.FindExistsIdempotency
 import com.dev.notification.backend.api.application.SaveIdempotency
 import com.dev.notification.backend.api.domain.entity.IdempotencyDomain
-import com.dev.notification.backend.api.domain.enums.IdempotencyStatus
+import com.dev.notification.backend.api.domain.enums.IdempotencyStatusEnum
 import com.dev.notification.backend.api.domain.exception.template.ServiceException
 import com.dev.notification.backend.api.domain.service.ProcessIdempotency
 import com.dev.notification.backend.api.infrastructure.api.dto.response.DefaultDTO
@@ -21,19 +21,19 @@ class ProcessIdempotencyImpl(
                          operation: () -> Any): Any {
         val existsIdempotency = findExistsIdempotency.execute(idempotencyKey)
         return when (existsIdempotency?.status) {
-            IdempotencyStatus.COMPLETED -> {
+            IdempotencyStatusEnum.COMPLETED -> {
                 val successResult = existsIdempotency.result ?: throw ServiceException("Completed key must have result!")
                 val finalResult = gson.fromJson(successResult, DefaultDTO::class.java)
                 finalResult
             }
-            IdempotencyStatus.FAILED -> {
+            IdempotencyStatusEnum.FAILED -> {
                 if (shouldRetry) {
                     processOperation(idempotencyKey, operation)
                 } else {
                     throw ServiceException("Operation previously failed: ${existsIdempotency.error}!")
                 }
             }
-            IdempotencyStatus.PROCESSING -> {
+            IdempotencyStatusEnum.PROCESSING -> {
                 if (shouldRetry) {
                     processOperation(idempotencyKey, operation)
                 } else {
@@ -52,7 +52,7 @@ class ProcessIdempotencyImpl(
                 processingKey,
                 result,
                 null,
-                IdempotencyStatus.COMPLETED
+                IdempotencyStatusEnum.COMPLETED
             )
             result
         } catch (e: Exception) {
@@ -60,7 +60,7 @@ class ProcessIdempotencyImpl(
                 processingKey,
                 null,
                 e.message,
-                IdempotencyStatus.FAILED
+                IdempotencyStatusEnum.FAILED
             )
             throw e
         }
@@ -69,7 +69,7 @@ class ProcessIdempotencyImpl(
     private fun createProcessingIdempotency(idempotencyKey: String): IdempotencyDomain {
         val processingKey = IdempotencyDomain.create(
             idempotencyKey,
-            IdempotencyStatus.PROCESSING
+            IdempotencyStatusEnum.PROCESSING
         )
         saveIdempotency.execute(processingKey)
         return processingKey
@@ -79,10 +79,10 @@ class ProcessIdempotencyImpl(
         processingIdempotency: IdempotencyDomain,
         result: T?,
         error: String?,
-        idempotencyStatus: IdempotencyStatus
+        idempotencyStatusEnum: IdempotencyStatusEnum
     ) {
         val completedKey = processingIdempotency.copy(
-            status = idempotencyStatus,
+            status = idempotencyStatusEnum,
             result = result?.let { gson.toJson(it) },
             error = error
         )

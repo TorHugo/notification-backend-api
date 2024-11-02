@@ -40,6 +40,13 @@ spring:
           min-idle: 0
           max-wait: -1ms
 
+  kafka:
+    consumer:
+      group-id: ${KAFKA_GROUP_ID:notification-user-api}
+      bootstrap-servers: localhost:9092
+    producer:
+        send-event-notification-topic: NotificationEventTopic
+
 management:
   endpoints:
     web:

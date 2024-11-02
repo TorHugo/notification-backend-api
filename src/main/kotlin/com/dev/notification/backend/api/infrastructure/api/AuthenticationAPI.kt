@@ -5,7 +5,6 @@ import com.dev.notification.backend.api.infrastructure.api.dto.request.SignInUse
 import com.dev.notification.backend.api.infrastructure.api.dto.response.DefaultDTO
 import com.dev.notification.backend.api.infrastructure.api.dto.response.DefaultMessageDTO
 import com.dev.notification.backend.api.infrastructure.api.dto.response.UserSuccessfullyDTO
-import com.dev.notification.backend.api.infrastructure.api.dto.response.ValidTokenDTO
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -28,8 +27,4 @@ interface AuthenticationAPI {
     @PostMapping("/public/logout")
     @ResponseStatus(HttpStatus.OK)
     fun logout() : ResponseEntity<DefaultDTO<DefaultMessageDTO>>
-
-    @PostMapping("/private/validate-token")
-    @ResponseStatus(HttpStatus.OK)
-    fun validateToken() : DefaultDTO<ValidTokenDTO>
 }

@@ -1,5 +1,5 @@
 package com.dev.notification.backend.api.domain.enums
 
-enum class IdempotencyStatus {
+enum class IdempotencyStatusEnum {
     PROCESSING, COMPLETED, FAILED
 }

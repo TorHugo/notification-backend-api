@@ -9,7 +9,6 @@ import com.dev.notification.backend.api.infrastructure.api.dto.request.SignInUse
 import com.dev.notification.backend.api.infrastructure.api.dto.response.DefaultDTO
 import com.dev.notification.backend.api.infrastructure.api.dto.response.DefaultMessageDTO
 import com.dev.notification.backend.api.infrastructure.api.dto.response.UserSuccessfullyDTO
-import com.dev.notification.backend.api.infrastructure.api.dto.response.ValidTokenDTO
 import com.dev.notification.backend.api.infrastructure.api.mappers.UserToDomainMapper
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
@@ -41,9 +40,5 @@ class AuthenticationController(
         return ResponseEntity.ok()
             .header(HttpHeaders.SET_COOKIE, logout.toString())
             .body(DefaultDTO.success(DefaultMessageDTO("Logout successfully!")))
-    }
-
-    override fun validateToken(): DefaultDTO<ValidTokenDTO> {
-        TODO("Not yet implemented")
     }
 }

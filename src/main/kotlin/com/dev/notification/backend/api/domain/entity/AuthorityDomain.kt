@@ -5,16 +5,13 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 data class AuthorityDomain(
-    val identifier: UUID,
+    override val identifier: UUID,
     val name: String,
     val description: String,
     val active: Boolean,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime?
-){
-    fun getIdentifier(): String {
-        return identifier.toString()
-    }
+)  : AggregateRoot<UUID>(){
 
     companion object {
         fun restore(

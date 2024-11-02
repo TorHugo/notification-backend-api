@@ -1,17 +1,17 @@
 package com.dev.notification.backend.api.domain.entity
 
-import com.dev.notification.backend.api.domain.enums.IdempotencyStatus
+import com.dev.notification.backend.api.domain.enums.IdempotencyStatusEnum
 import java.time.LocalDateTime
 
 data class IdempotencyDomain(
     val identifier: String,
-    val status: IdempotencyStatus,
+    val status: IdempotencyStatusEnum,
     val result: String? = null,
     val error: String? = null,
     val createdAt: LocalDateTime
 ) {
     companion object {
-        fun create(identifier: String, status: IdempotencyStatus): IdempotencyDomain {
+        fun create(identifier: String, status: IdempotencyStatusEnum): IdempotencyDomain {
             return IdempotencyDomain(
                 identifier = identifier,
                 status = status,
@@ -19,7 +19,7 @@ data class IdempotencyDomain(
             )
         }
 
-        fun restore(identifier: String, status: IdempotencyStatus, result: String?, error: String?, createdAt: LocalDateTime): IdempotencyDomain {
+        fun restore(identifier: String, status: IdempotencyStatusEnum, result: String?, error: String?, createdAt: LocalDateTime): IdempotencyDomain {
             return IdempotencyDomain(identifier, status, result, error, createdAt)
         }
     }

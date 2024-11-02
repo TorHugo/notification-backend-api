@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 import java.util.*
 
 data class UserDomain(
-    val identifier: UUID,
+    override val identifier: UUID,
     val email: Email,
     var password: String,
     val firstName: String,
@@ -17,13 +17,13 @@ data class UserDomain(
     val createdAt: LocalDateTime,
     var updatedAt: LocalDateTime?,
     var lastAccess: LocalDateTime?
-) {
+) : AggregateRoot<UUID>() {
     fun updateLastAccess() {
         lastAccess = LocalDateTime.now()
     }
 
-    fun getIdentifier() : String {
-        return identifier.toString()
+    fun fullName(): String{
+        return "$firstName $lastName"
     }
 
     companion object {

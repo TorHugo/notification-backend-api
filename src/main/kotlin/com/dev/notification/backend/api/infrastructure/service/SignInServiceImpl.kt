@@ -4,11 +4,15 @@ import com.dev.notification.backend.api.application.FindAuthorityByName
 import com.dev.notification.backend.api.application.FindUserByEmail
 import com.dev.notification.backend.api.application.SaveToUserAuthorities
 import com.dev.notification.backend.api.application.SaveUser
+import com.dev.notification.backend.api.domain.entity.NotificationDomain
 import com.dev.notification.backend.api.domain.entity.UserDomain
 import com.dev.notification.backend.api.domain.enums.AuthorityEnum
+import com.dev.notification.backend.api.domain.enums.TemplateMessageEnum
 import com.dev.notification.backend.api.domain.exception.template.DomainException
 import com.dev.notification.backend.api.domain.service.SignInService
+import com.dev.notification.backend.api.domain.value.`object`.Parameter
 import jakarta.transaction.Transactional
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -17,7 +21,8 @@ class SignInServiceImpl(
     private val findUserByEmail: FindUserByEmail,
     private val saveUser: SaveUser,
     private val saveToUserAuthorities: SaveToUserAuthorities,
-    private val findAuthorityByName: FindAuthorityByName
+    private val findAuthorityByName: FindAuthorityByName,
+    private val applicationEventPublisher: ApplicationEventPublisher
 ): SignInService {
 
     @Transactional
@@ -25,6 +30,7 @@ class SignInServiceImpl(
         validateUserDoesNotExist(domain.email.value)
         createUser(domain)
         assignAuthorities(domain)
+        sendNotification(domain)
         return domain.getIdentifier()
     }
 
@@ -41,5 +47,19 @@ class SignInServiceImpl(
     private fun assignAuthorities(userDomain: UserDomain) {
         val authority = findAuthorityByName.execute(AuthorityEnum.DEFAULT_USER.authorityName)
         saveToUserAuthorities.execute(userDomain, listOf(authority))
+    }
+
+    private fun sendNotification(domain: UserDomain) {
+        val templateMessage = TemplateMessageEnum.CONFIRMED_ACCOUNT
+        val parameters = listOf(
+            Parameter("name", domain.fullName())
+        )
+        val notification = NotificationDomain.create(
+            domain.email.value,
+            templateMessage.subject,
+            templateMessage.template,
+            parameters
+        )
+        applicationEventPublisher.publishEvent(notification)
     }
 }
