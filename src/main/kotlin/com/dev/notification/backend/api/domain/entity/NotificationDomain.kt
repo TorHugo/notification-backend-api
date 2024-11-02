@@ -1,6 +1,6 @@
 package com.dev.notification.backend.api.domain.entity
 
-import com.dev.notification.backend.api.domain.`object`.Parameter
+import com.dev.notification.backend.api.domain.objects.Parameter
 import com.dev.notification.backend.api.domain.utils.IdentifierUtils
 import com.dev.notification.backend.api.domain.utils.JsonUtils
 import java.time.LocalDateTime

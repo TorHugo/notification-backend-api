@@ -1,6 +1,6 @@
 package com.dev.notification.backend.api.domain.entity
 
-import com.dev.notification.backend.api.domain.`object`.Email
+import com.dev.notification.backend.api.domain.objects.Email
 import com.dev.notification.backend.api.domain.utils.IdentifierUtils
 import java.time.LocalDateTime
 import java.util.*
