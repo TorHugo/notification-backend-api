@@ -22,25 +22,40 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Run ktlint check
+      - name: Setup ktlint
         run: |
           curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.50.0/ktlint
           chmod a+x ktlint
-          ./ktlint --relative .
-        continue-on-error: true
 
       - name: Run ktlint format
+        id: format
         run: |
-          ./ktlint -F --relative .
+          ./ktlint -F --relative . || true
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
+        if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: '- Auto formatting with kt-lint.'
-          title: 'STYLE (kt-lint): '
+          commit-message: 'style: auto formatting with ktlint'
+          title: 'style: ktlint auto-format'
           body: |
-            - Auto formatting with kt-lint.
+            Auto-formatting changes applied by ktlint.
+            
+            Note: Some issues may require manual fixes:
+            - Check package names for disallowed characters
+            - Remove wildcard imports
+            - Review any formatting issues that couldn't be auto-fixed
           branch: style/kt-lint-format
           base: ${{ github.head_ref }}
           delete-branch: true
+
+      - name: Run ktlint check
+        if: always()
+        run: |
+          ./ktlint --relative . || (echo "::warning::KtLint found issues that require manual fixes. Please review the logs above." && exit 1)
