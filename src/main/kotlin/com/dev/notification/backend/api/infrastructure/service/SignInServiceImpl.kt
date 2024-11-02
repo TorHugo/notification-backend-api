@@ -9,8 +9,8 @@ import com.dev.notification.backend.api.domain.entity.UserDomain
 import com.dev.notification.backend.api.domain.enums.AuthorityEnum
 import com.dev.notification.backend.api.domain.enums.TemplateMessageEnum
 import com.dev.notification.backend.api.domain.exception.template.DomainException
-import com.dev.notification.backend.api.domain.service.SignInService
 import com.dev.notification.backend.api.domain.`object`.Parameter
+import com.dev.notification.backend.api.domain.service.SignInService
 import jakarta.transaction.Transactional
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
@@ -23,7 +23,7 @@ class SignInServiceImpl(
     private val saveToUserAuthorities: SaveToUserAuthorities,
     private val findAuthorityByName: FindAuthorityByName,
     private val applicationEventPublisher: ApplicationEventPublisher
-): SignInService {
+) : SignInService {
 
     @Transactional
     override fun execute(domain: UserDomain): String {
@@ -36,11 +36,12 @@ class SignInServiceImpl(
 
     private fun validateUserDoesNotExist(email: String) {
         val existsUser = findUserByEmail.execute(email)
-        if (Objects.nonNull(existsUser))
+        if (Objects.nonNull(existsUser)) {
             throw DomainException("This user already exists with e-mail!", email)
+        }
     }
 
-    private fun createUser(domain: UserDomain){
+    private fun createUser(domain: UserDomain) {
         saveUser.execute(domain)
     }
 

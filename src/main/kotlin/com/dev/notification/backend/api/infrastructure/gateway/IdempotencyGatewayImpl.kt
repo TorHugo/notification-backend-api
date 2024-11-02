@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 @Component
 class IdempotencyGatewayImpl(
     val idempotencyRepository: IdempotencyRepository
-): IdempotencyGateway {
+) : IdempotencyGateway {
 
     companion object {
         private const val IDEMPOTENCY_PREFIX = "idempotency"

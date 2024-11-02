@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component
 @Component
 class UpdateLastAccess(
     private val userGateway: UserGateway
-){
-    fun execute(email: String){
+) {
+    fun execute(email: String) {
         val userDomain = userGateway.findByEmailWithThrows(email)
         userDomain.updateLastAccess()
         userGateway.save(userDomain)

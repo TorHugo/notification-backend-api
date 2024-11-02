@@ -26,5 +26,4 @@ class UserGatewayImpl(
         val entity = userRepository.findByEmail(email) ?: throw GatewayException("User not found!", email)
         return UserEntityMapper.toAggregate(entity)
     }
-
 }

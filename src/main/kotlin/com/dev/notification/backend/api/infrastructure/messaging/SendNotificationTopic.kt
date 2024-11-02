@@ -12,7 +12,7 @@ class SendNotificationTopic(
     @Value("\${spring.kafka.producer.send-event-notification-topic}")
     val topic: String
 ) {
-    fun execute(message: Any){
+    fun execute(message: Any) {
         kafkaProducer.sendMessage(topic, gson.toJson(message))
     }
 }

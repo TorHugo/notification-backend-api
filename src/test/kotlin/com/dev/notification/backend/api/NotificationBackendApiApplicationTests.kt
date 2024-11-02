@@ -9,5 +9,4 @@ class NotificationBackendApiApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 }

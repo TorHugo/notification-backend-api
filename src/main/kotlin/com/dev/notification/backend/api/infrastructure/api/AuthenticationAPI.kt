@@ -18,13 +18,19 @@ interface AuthenticationAPI {
 
     @PostMapping("/public/sign-in")
     @ResponseStatus(HttpStatus.CREATED)
-    fun signIn(@Valid @RequestBody entry: SignInUserDTO) : DefaultDTO<UserSuccessfullyDTO>
+    fun signIn(
+        @Valid @RequestBody
+        entry: SignInUserDTO
+    ): DefaultDTO<UserSuccessfullyDTO>
 
     @PostMapping("/public/login")
     @ResponseStatus(HttpStatus.OK)
-    fun login(@Valid @RequestBody entry: LoginUserDTO) : ResponseEntity<DefaultDTO<DefaultMessageDTO>>
+    fun login(
+        @Valid @RequestBody
+        entry: LoginUserDTO
+    ): ResponseEntity<DefaultDTO<DefaultMessageDTO>>
 
     @PostMapping("/public/logout")
     @ResponseStatus(HttpStatus.OK)
-    fun logout() : ResponseEntity<DefaultDTO<DefaultMessageDTO>>
+    fun logout(): ResponseEntity<DefaultDTO<DefaultMessageDTO>>
 }

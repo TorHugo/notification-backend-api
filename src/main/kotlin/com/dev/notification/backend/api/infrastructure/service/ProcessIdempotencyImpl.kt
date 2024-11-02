@@ -15,10 +15,12 @@ class ProcessIdempotencyImpl(
     val findExistsIdempotency: FindExistsIdempotency,
     val saveIdempotency: SaveIdempotency,
     val gson: Gson
-): ProcessIdempotency {
-    override fun execute(idempotencyKey: String,
-                         shouldRetry: Boolean,
-                         operation: () -> Any): Any {
+) : ProcessIdempotency {
+    override fun execute(
+        idempotencyKey: String,
+        shouldRetry: Boolean,
+        operation: () -> Any
+    ): Any {
         val existsIdempotency = findExistsIdempotency.execute(idempotencyKey)
         return when (existsIdempotency?.status) {
             IdempotencyStatusEnum.COMPLETED -> {
@@ -88,5 +90,4 @@ class ProcessIdempotencyImpl(
         )
         saveIdempotency.execute(completedKey)
     }
-
 }

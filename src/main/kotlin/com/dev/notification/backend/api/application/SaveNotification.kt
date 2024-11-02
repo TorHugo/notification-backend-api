@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component
 @Component
 class SaveNotification(
     val notificationGateway: NotificationGateway
-){
-    fun execute(domain: NotificationDomain){
+) {
+    fun execute(domain: NotificationDomain) {
         notificationGateway.save(domain)
     }
 }

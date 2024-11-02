@@ -11,7 +11,7 @@ class KafkaProducer(
 ) {
     protected val logger: Log = LogFactory.getLog(this.javaClass)
 
-    fun sendMessage(topic: String, message: String){
+    fun sendMessage(topic: String, message: String) {
         try {
             kafkaTemplate.send(topic, message)
         } catch (e: Exception) {

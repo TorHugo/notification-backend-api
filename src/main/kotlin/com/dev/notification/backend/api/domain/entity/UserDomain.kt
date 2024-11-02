@@ -1,7 +1,7 @@
 package com.dev.notification.backend.api.domain.entity
 
-import com.dev.notification.backend.api.domain.utils.IdentifierUtils
 import com.dev.notification.backend.api.domain.`object`.Email
+import com.dev.notification.backend.api.domain.utils.IdentifierUtils
 import java.time.LocalDateTime
 import java.util.*
 
@@ -22,17 +22,17 @@ data class UserDomain(
         lastAccess = LocalDateTime.now()
     }
 
-    fun fullName(): String{
+    fun fullName(): String {
         return "$firstName $lastName"
     }
 
     companion object {
         fun create(
-                email: String,
-                password: String,
-                firstName: String,
-                lastName: String,
-                admin: Boolean
+            email: String,
+            password: String,
+            firstName: String,
+            lastName: String,
+            admin: Boolean
         ): UserDomain {
             return UserDomain(
                 identifier = IdentifierUtils.generated(),

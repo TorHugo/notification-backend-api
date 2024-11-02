@@ -13,8 +13,8 @@ class Login(
     private val authenticationManager: AuthenticationManager,
     private val updateLastAccess: UpdateLastAccess,
     private val jwtTokenUtils: JwtTokenUtils
-){
-    fun execute(email: String, password: String) : ResponseCookie {
+) {
+    fun execute(email: String, password: String): ResponseCookie {
         val authentication = authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(email, password)
         )

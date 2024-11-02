@@ -39,6 +39,6 @@ abstract class RedisTemplateRepository<T : RedisEntity>(
     }
 
     fun identifier(prefix: String, key: String): String {
-        return "${prefix}_${key}"
+        return "${prefix}_$key"
     }
 }

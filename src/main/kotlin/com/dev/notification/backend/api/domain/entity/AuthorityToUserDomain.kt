@@ -3,17 +3,16 @@ package com.dev.notification.backend.api.domain.entity
 import java.time.LocalDateTime
 import java.util.*
 
-
 data class AuthorityToUserDomain(
     val userIdentifier: UUID,
     val authorityIdentifier: UUID,
     val createdAt: LocalDateTime
 ) {
-    fun getUserIdentifier() : String {
+    fun getUserIdentifier(): String {
         return userIdentifier.toString()
     }
 
-    fun getAuthorityIdentifier() : String {
+    fun getAuthorityIdentifier(): String {
         return authorityIdentifier.toString()
     }
 
@@ -21,7 +20,7 @@ data class AuthorityToUserDomain(
         fun create(
             userIdentifier: UUID,
             authorityIdentifier: UUID
-        ): AuthorityToUserDomain{
+        ): AuthorityToUserDomain {
             return AuthorityToUserDomain(
                 userIdentifier,
                 authorityIdentifier,

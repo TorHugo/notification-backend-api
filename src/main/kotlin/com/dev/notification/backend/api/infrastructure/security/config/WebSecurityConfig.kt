@@ -29,11 +29,12 @@ class WebSecurityConfig(
     fun filterChain(httpSecurity: HttpSecurity): SecurityFilterChain {
         return httpSecurity
             .cors { it.disable() }
-            .csrf{ it.disable() }
+            .csrf { it.disable() }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-            .authorizeHttpRequests { it
-                .requestMatchers(*PUBLIC).permitAll()
-                .anyRequest().authenticated()
+            .authorizeHttpRequests {
+                it
+                    .requestMatchers(*PUBLIC).permitAll()
+                    .anyRequest().authenticated()
             }
             .addFilterBefore(authenticationJwtTokenFilter, UsernamePasswordAuthenticationFilter::class.java)
             .build()

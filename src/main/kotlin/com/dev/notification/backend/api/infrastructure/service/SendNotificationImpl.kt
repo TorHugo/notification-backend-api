@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 class SendNotificationImpl(
     private val notificationGateway: NotificationGateway,
     private val sendNotificationTopic: SendNotificationTopic
-): SendNotification {
+) : SendNotification {
     override fun execute(domain: NotificationDomain) {
         notificationGateway.save(domain)
         sendNotificationTopic.execute(domain)

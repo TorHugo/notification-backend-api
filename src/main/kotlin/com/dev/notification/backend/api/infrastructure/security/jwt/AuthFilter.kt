@@ -31,7 +31,9 @@ class AuthFilter(
                 if (!loadedUser.isEnabled) throw AccessDeniedException("User is not active!")
 
                 val authentication = UsernamePasswordAuthenticationToken(
-                    loadedUser, null, loadedUser.authorities
+                    loadedUser,
+                    null,
+                    loadedUser.authorities
                 )
                 authentication.details = WebAuthenticationDetailsSource().buildDetails(request)
                 SecurityContextHolder.getContext().authentication = authentication
@@ -42,5 +44,4 @@ class AuthFilter(
 
         filterChain.doFilter(request, response)
     }
-
 }

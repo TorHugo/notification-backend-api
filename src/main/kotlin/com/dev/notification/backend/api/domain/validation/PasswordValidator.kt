@@ -24,5 +24,4 @@ class PasswordValidator : ConstraintValidator<Password, String> {
         }
         return true
     }
-
 }

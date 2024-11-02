@@ -1,8 +1,8 @@
 package com.dev.notification.backend.api.domain.entity
 
+import com.dev.notification.backend.api.domain.`object`.Parameter
 import com.dev.notification.backend.api.domain.utils.IdentifierUtils
 import com.dev.notification.backend.api.domain.utils.JsonUtils
-import com.dev.notification.backend.api.domain.`object`.Parameter
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -20,10 +20,12 @@ data class NotificationDomain(
     }
 
     companion object {
-        fun create(contact: String,
-                   subject: String,
-                   template: String,
-                   parameters: List<Parameter>): NotificationDomain{
+        fun create(
+            contact: String,
+            subject: String,
+            template: String,
+            parameters: List<Parameter>
+        ): NotificationDomain {
             return NotificationDomain(
                 identifier = IdentifierUtils.generated(),
                 contact = contact,

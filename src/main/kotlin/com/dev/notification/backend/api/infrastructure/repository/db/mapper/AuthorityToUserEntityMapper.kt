@@ -13,7 +13,7 @@ object AuthorityToUserEntityMapper {
         )
     }
 
-    fun fromAggregate(domains: List<AuthorityToUserDomain>) : List<AuthorityToUserEntity> {
+    fun fromAggregate(domains: List<AuthorityToUserDomain>): List<AuthorityToUserEntity> {
         return domains.map { domain -> fromAggregate(domain) }
     }
 }

@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 
 @Table(name = "users_tb")
 @Entity
-class UserEntity (
+class UserEntity(
     @Id
     val identifier: String,
     val firstName: String,

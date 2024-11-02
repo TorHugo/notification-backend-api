@@ -3,7 +3,7 @@ package com.dev.notification.backend.api.infrastructure.repository.redis.models
 import com.dev.notification.backend.api.domain.enums.IdempotencyStatusEnum
 import java.time.LocalDateTime
 
-data class IdempotencyEntity (
+data class IdempotencyEntity(
     val prefix: String,
     val key: String,
     val status: IdempotencyStatusEnum,

@@ -13,7 +13,7 @@ class NotificationEventListener(
     private val logger = LoggerFactory.getLogger(NotificationEventListener::class.java)
 
     @EventListener
-    fun handlerNotification(event: NotificationDomain){
+    fun handlerNotification(event: NotificationDomain) {
         try {
             sendNotification.execute(event)
         } catch (e: Exception) {

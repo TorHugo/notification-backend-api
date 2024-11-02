@@ -11,7 +11,7 @@ data class AuthorityDomain(
     val active: Boolean,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime?
-)  : AggregateRoot<UUID>(){
+) : AggregateRoot<UUID>() {
 
     companion object {
         fun restore(
@@ -21,7 +21,7 @@ data class AuthorityDomain(
             active: Boolean,
             createdAt: LocalDateTime,
             updatedAt: LocalDateTime?
-        ): AuthorityDomain{
+        ): AuthorityDomain {
             return AuthorityDomain(
                 IdentifierUtils.byString(identifier),
                 name,

@@ -27,7 +27,7 @@ class KafkaConfig(
     }
 
     @Bean
-    fun producerFactory(): ProducerFactory<String, String>{
+    fun producerFactory(): ProducerFactory<String, String> {
         return DefaultKafkaProducerFactory(producerConfig())
     }
 
