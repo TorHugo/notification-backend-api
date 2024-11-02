@@ -1,75 +1,49 @@
-name: Kt Lint Check and Auto-fix
+name: KTLint Workflow
 
 on:
-  pull_request:
-    branches: [ 'develop', 'uat', 'prod' ]
   push:
-    branches: [ 'develop', 'uat', 'prod' ]
-
-permissions:
-  contents: write
-  pull-requests: write
+    branches:
+      - develop
 
 jobs:
-  kt-lint:
+  ktlint:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: '11'
+          distribution: 'adopt'
 
-      - name: Setup ktlint
+      - name: Install KTLint
         run: |
-          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.50.0/ktlint
+          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.49.0/ktlint &&
           chmod a+x ktlint
 
-      - name: Run ktlint check
-        run: |
-          ./ktlint --relative . || (echo "::warning::KtLint found issues that require manual fixes. Please review the logs above." && exit 1)
+      - name: Run KTLint
+        run: ./ktlint -F "src/**/*.kt"
 
-      - name: Run ktlint format
+      - name: Commit and Push changes
         run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          ./ktlint -F --relative .
-
-      - name: Commit changes
-        id: commit
-        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b style/ktlint-format
           git add .
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-            echo "changes=false" >> $GITHUB_OUTPUT
-          else
-            git commit -m "style: auto formatting with ktlint"
-            echo "changes=true" >> $GITHUB_OUTPUT
-          fi
+          git commit -m 'style: apply ktlint formatting'
+          git push --set-upstream origin style/ktlint-format
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Pull Request
-        if: steps.commit.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'style: auto formatting with ktlint'
-          title: 'style: ktlint auto-format'
-          body: |
-            Auto-formatting changes applied by ktlint.
-            
-            Changes include:
-            - Code formatting according to Kotlin style guide
-            - Import optimization
-            - Other style fixes
-            
-            Please review the changes carefully.
-          branch: style/kt-lint-format
-          base: ${{ github.head_ref }}
-          delete-branch: true
+          commit-message: 'style: apply ktlint formatting'
+          branch: style/ktlint-format
+          base: develop
+          title: 'Apply KTLint Formatting'
+          body: 'This PR applies KTLint formatting fixes'
