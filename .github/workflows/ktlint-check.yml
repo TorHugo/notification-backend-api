@@ -32,6 +32,10 @@ jobs:
           curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.50.0/ktlint
           chmod a+x ktlint
 
+      - name: Run ktlint check
+        run: |
+          ./ktlint --relative . || (echo "::warning::KtLint found issues that require manual fixes. Please review the logs above." && exit 1)
+
       - name: Run ktlint format
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -69,8 +73,3 @@ jobs:
           branch: style/kt-lint-format
           base: ${{ github.head_ref }}
           delete-branch: true
-
-      - name: Run ktlint check
-        if: always()
-        run: |
-          ./ktlint --relative . || (echo "::warning::KtLint found issues that require manual fixes. Please review the logs above." && exit 0)

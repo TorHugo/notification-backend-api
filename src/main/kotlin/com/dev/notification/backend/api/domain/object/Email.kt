@@ -1,4 +1,4 @@
-package com.dev.notification.backend.api.domain.value.`object`
+package com.dev.notification.backend.api.domain.`object`
 
 import com.dev.notification.backend.api.domain.exception.template.DomainException
 import java.util.*

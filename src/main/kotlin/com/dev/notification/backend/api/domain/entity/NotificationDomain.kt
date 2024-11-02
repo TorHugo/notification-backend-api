@@ -2,7 +2,7 @@ package com.dev.notification.backend.api.domain.entity
 
 import com.dev.notification.backend.api.domain.utils.IdentifierUtils
 import com.dev.notification.backend.api.domain.utils.JsonUtils
-import com.dev.notification.backend.api.domain.value.`object`.Parameter
+import com.dev.notification.backend.api.domain.`object`.Parameter
 import java.time.LocalDateTime
 import java.util.UUID
 

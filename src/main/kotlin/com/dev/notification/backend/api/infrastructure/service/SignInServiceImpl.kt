@@ -10,7 +10,7 @@ import com.dev.notification.backend.api.domain.enums.AuthorityEnum
 import com.dev.notification.backend.api.domain.enums.TemplateMessageEnum
 import com.dev.notification.backend.api.domain.exception.template.DomainException
 import com.dev.notification.backend.api.domain.service.SignInService
-import com.dev.notification.backend.api.domain.value.`object`.Parameter
+import com.dev.notification.backend.api.domain.`object`.Parameter
 import jakarta.transaction.Transactional
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
