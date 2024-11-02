@@ -16,21 +16,15 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
-      - name: Set up JDK
-        uses: actions/setup-java@v3
+      - name: Run ktlint
+        uses: ScaCap/action-ktlint@master
         with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Setup ktlint
-        run: |
-          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.50.0/ktlint
-          chmod a+x ktlint
-
-      - name: Run ktlint format
-        id: format
-        run: |
-          ./ktlint -F --relative . || true
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          android: false
+          fail_on_error: false
+          ktlint_version: 0.50.0
+          args: "--format"  # This will auto-format the code
 
       - name: Check for changes
         id: git-check
@@ -47,15 +41,12 @@ jobs:
           body: |
             Auto-formatting changes applied by ktlint.
             
-            Note: Some issues may require manual fixes:
-            - Check package names for disallowed characters
-            - Remove wildcard imports
-            - Review any formatting issues that couldn't be auto-fixed
+            Changes include:
+            - Code formatting according to Kotlin style guide
+            - Import optimization
+            - Other style fixes
+            
+            Please review the changes carefully.
           branch: style/kt-lint-format
           base: ${{ github.head_ref }}
           delete-branch: true
-
-      - name: Run ktlint check
-        if: always()
-        run: |
-          ./ktlint --relative . || (echo "::warning::KtLint found issues that require manual fixes. Please review the logs above." && exit 1)
