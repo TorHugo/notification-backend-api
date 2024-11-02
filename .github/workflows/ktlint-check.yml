@@ -1,0 +1,46 @@
+name: Kt Lint Check and Auto-fix
+
+on:
+  pull_request:
+    branches: [ 'develop', 'uat', 'prod' ]
+  push:
+    branches: [ 'develop', 'uat', 'prod' ]
+
+jobs:
+  kt-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Run ktlint check
+        run: |
+          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.50.0/ktlint
+          chmod a+x ktlint
+          ./ktlint --relative .
+        continue-on-error: true
+
+      - name: Run ktlint format
+        run: |
+          ./ktlint -F --relative .
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: '- Auto formatting with kt-lint.'
+          title: 'STYLE (kt-lint): '
+          body: |
+            - Auto formatting with kt-lint.
+          branch: style/kt-lint-format
+          base: ${{ github.head_ref }}
+          delete-branch: true
