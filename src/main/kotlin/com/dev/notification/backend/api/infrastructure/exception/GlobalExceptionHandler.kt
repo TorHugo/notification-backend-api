@@ -1,6 +1,11 @@
 package com.dev.notification.backend.api.infrastructure.exception
 
-import com.dev.notification.backend.api.domain.exception.template.*
+
+import com.dev.notification.backend.api.domain.exception.template.DomainException
+import com.dev.notification.backend.api.domain.exception.template.InvalidArgumentException
+import com.dev.notification.backend.api.domain.exception.template.GatewayException
+import com.dev.notification.backend.api.domain.exception.template.RepositoryException
+import com.dev.notification.backend.api.domain.exception.template.ServiceException
 import com.dev.notification.backend.api.infrastructure.api.dto.response.DefaultDTO
 import com.dev.notification.backend.api.infrastructure.exception.models.ExceptionData
 import jakarta.servlet.http.HttpServletRequest
