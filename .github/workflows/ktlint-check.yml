@@ -27,18 +27,25 @@ jobs:
       - name: Run KTLint
         run: ./ktlint -F "src/**/*.kt"
 
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --exit-code || echo "changes"
+
       - name: Commit and Push changes
+        if: steps.check_changes.outputs.changes == 'changes'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git checkout -b style/ktlint-format
-          git add .
+          git add "src/**/*.kt" # Especifica os arquivos Kotlin
           git commit -m 'style: apply ktlint formatting'
           git push --set-upstream origin style/ktlint-format
 
       - name: Create Pull Request
+        if: steps.check_changes.outputs.changes == 'changes'
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
