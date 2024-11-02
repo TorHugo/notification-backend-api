@@ -28,6 +28,8 @@ jobs:
         run: ./ktlint -F "src/**/*.kt"
 
       - name: Commit and Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -35,8 +37,6 @@ jobs:
           git add .
           git commit -m 'style: apply ktlint formatting'
           git push --set-upstream origin style/ktlint-format
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
