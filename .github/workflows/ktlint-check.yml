@@ -22,18 +22,33 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Run ktlint check
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Add ktlint task to build.gradle.kts
         run: |
-          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.50.0/ktlint
-          chmod a+x ktlint
-          ./ktlint --relative .
-        continue-on-error: true
+          if [ -f build.gradle.kts ]; then
+            # Verifica se as configurações do ktlint já existem
+            if ! grep -q "id(\"org.jlleitschuh.gradle.ktlint\")" build.gradle.kts; then
+              # Adiciona o plugin do ktlint
+              sed -i '1i plugins {\n    id("org.jlleitschuh.gradle.ktlint") version "11.6.1"\n}' build.gradle.kts
+            fi
+          else
+            echo "plugins {
+                id(\"org.jlleitschuh.gradle.ktlint\") version \"11.6.1\"
+            }" > build.gradle.kts
+          fi
 
       - name: Run ktlint format
+        run: ./gradlew ktlintFormat
+
+      - name: Check for changes
+        id: git-check
         run: |
-          ./ktlint -F --relative .
+          git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
+        if: steps.git-check.outputs.changes == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
