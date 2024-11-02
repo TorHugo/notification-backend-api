@@ -79,7 +79,7 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(GatewayException::class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    fun handleGatewayExceptionException(
+    fun handleGatewayException(
         ex: GatewayException,
         request: HttpServletRequest
     ): DefaultDTO<ExceptionData> {
