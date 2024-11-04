@@ -1,0 +1,53 @@
+name: KtLint Check and Auto-format v4
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  ktlint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: develop
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Get commit hash
+        id: commit
+        run: |
+          HASH=$(git rev-parse --short HEAD)
+          echo "hash=$HASH" >> $GITHUB_OUTPUT
+
+      - name: Run KtLint Format
+        run: |
+          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.48.0/ktlint
+          chmod a+x ktlint
+          ./ktlint --format
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "STYLE (ktlint-format): apply ktlint formatting."
+          title: "STYLE (ktlint-format): apply ktlint formatting."
+          body: |
+            - 🤖 Commit automático via workflows.
+            - Este pull-request foi gerado automaticamente para corrigir problemas de formatação detectados pelo kt-lint, e que provavelmente iria dar problema ao executar no jenkins.
+            - Por favor, antes de realizar o merge, revise as alterações realizadas!
+          branch: style/ktlint_format_${{ steps.commit.outputs.hash }}
+          delete-branch: true
+          base: develop
