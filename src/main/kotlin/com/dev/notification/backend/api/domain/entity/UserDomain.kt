@@ -16,7 +16,7 @@ data class UserDomain(
     val admin: Boolean,
     val createdAt: LocalDateTime,
     var updatedAt: LocalDateTime?,
-    var lastAccess: LocalDateTime?
+    var lastAccess: LocalDateTime?,
 ) : AggregateRoot<UUID>() {
     fun updateLastAccess() {
         lastAccess = LocalDateTime.now()
@@ -32,7 +32,7 @@ data class UserDomain(
             password: String,
             firstName: String,
             lastName: String,
-            admin: Boolean
+            admin: Boolean,
         ): UserDomain {
             return UserDomain(
                 identifier = IdentifierUtils.generated(),
@@ -45,7 +45,7 @@ data class UserDomain(
                 admin = admin,
                 createdAt = LocalDateTime.now(),
                 updatedAt = null,
-                lastAccess = null
+                lastAccess = null,
             )
         }
 
@@ -60,7 +60,7 @@ data class UserDomain(
             confirmed: Boolean,
             createdAt: LocalDateTime,
             updatedAt: LocalDateTime?,
-            lastAccess: LocalDateTime?
+            lastAccess: LocalDateTime?,
         ): UserDomain {
             return UserDomain(
                 IdentifierUtils.byString(identifier),
@@ -73,7 +73,7 @@ data class UserDomain(
                 confirmed = confirmed,
                 createdAt = createdAt,
                 updatedAt = updatedAt,
-                lastAccess = lastAccess
+                lastAccess = lastAccess,
             )
         }
     }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class FindUserByEmail(
-    private val userGateway: UserGateway
+    private val userGateway: UserGateway,
 ) {
     fun execute(email: String): UserDomain? {
         return userGateway.findByEmail(email)

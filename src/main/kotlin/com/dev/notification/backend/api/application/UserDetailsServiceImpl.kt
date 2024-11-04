@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class UserDetailsServiceImpl(
-    private val userGateway: UserGateway
+    private val userGateway: UserGateway,
 ) : UserDetailsService {
 
     override fun loadUserByUsername(username: String?): UserDetails {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class SaveToUserAuthorities(
-    private val authorityToUserGateway: AuthorityToUserGateway
+    private val authorityToUserGateway: AuthorityToUserGateway,
 ) {
 
     fun execute(user: UserDomain, authorities: List<AuthorityDomain>) {

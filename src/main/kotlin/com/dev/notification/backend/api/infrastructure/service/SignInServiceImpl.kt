@@ -22,7 +22,7 @@ class SignInServiceImpl(
     private val saveUser: SaveUser,
     private val saveToUserAuthorities: SaveToUserAuthorities,
     private val findAuthorityByName: FindAuthorityByName,
-    private val applicationEventPublisher: ApplicationEventPublisher
+    private val applicationEventPublisher: ApplicationEventPublisher,
 ) : SignInService {
 
     @Transactional
@@ -53,13 +53,13 @@ class SignInServiceImpl(
     private fun sendNotification(domain: UserDomain) {
         val templateMessage = TemplateMessageEnum.CONFIRMED_ACCOUNT
         val parameters = listOf(
-            Parameter("name", domain.fullName())
+            Parameter("name", domain.fullName()),
         )
         val notification = NotificationDomain.create(
             domain.email.value,
             templateMessage.subject,
             templateMessage.template,
-            parameters
+            parameters,
         )
         applicationEventPublisher.publishEvent(notification)
     }

@@ -6,5 +6,5 @@ data class ValidTokenDTO(
     val currentToken: String,
     val validated: Boolean,
     val expirationTime: LocalDateTime,
-    val authorities: List<String>
+    val authorities: List<String>,
 )

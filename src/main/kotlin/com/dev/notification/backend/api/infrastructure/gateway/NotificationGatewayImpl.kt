@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class NotificationGatewayImpl(
-    val notificationRepository: NotificationRepository
+    val notificationRepository: NotificationRepository,
 ) : NotificationGateway {
     override fun save(domain: NotificationDomain) {
         val entity = NotificationEntityMapper.fromAggregate(domain)

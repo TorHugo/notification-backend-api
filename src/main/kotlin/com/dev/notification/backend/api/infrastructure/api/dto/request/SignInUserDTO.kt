@@ -7,5 +7,5 @@ data class SignInUserDTO(
     @JsonProperty("first_name") val firstName: String,
     @JsonProperty("last_name") val lastName: String,
     val email: String,
-    @Password val password: String
+    @Password val password: String,
 )

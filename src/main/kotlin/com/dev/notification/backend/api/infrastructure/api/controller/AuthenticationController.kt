@@ -20,7 +20,7 @@ class AuthenticationController(
     private val login: Login,
     private val logout: Logout,
     private val encoder: PasswordEncoder,
-    private val signIn: SignInService
+    private val signIn: SignInService,
 ) : AuthenticationAPI {
 
     override fun signIn(entry: SignInUserDTO): DefaultDTO<UserSuccessfullyDTO> {

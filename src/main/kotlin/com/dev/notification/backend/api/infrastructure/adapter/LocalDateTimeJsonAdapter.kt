@@ -19,7 +19,7 @@ class LocalDateTimeJsonAdapter : JsonSerializer<LocalDateTime>, JsonDeserializer
     override fun serialize(
         localDateTime: LocalDateTime,
         type: Type,
-        jsonSerializationContext: JsonSerializationContext
+        jsonSerializationContext: JsonSerializationContext,
     ): JsonElement {
         return JsonPrimitive(localDateTime.format(formatter))
     }
@@ -27,7 +27,7 @@ class LocalDateTimeJsonAdapter : JsonSerializer<LocalDateTime>, JsonDeserializer
     override fun deserialize(
         jsonElement: JsonElement,
         type: Type,
-        jsonDeserializationContext: JsonDeserializationContext
+        jsonDeserializationContext: JsonDeserializationContext,
     ): LocalDateTime {
         return LocalDateTime.parse(jsonElement.asString, formatter)
     }

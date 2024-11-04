@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class AuthorityToUserGatewayImpl(
-    private val authorityToUserRepository: AuthorityToUserRepository
+    private val authorityToUserRepository: AuthorityToUserRepository,
 ) : AuthorityToUserGateway {
     override fun saveAll(authorities: List<AuthorityToUserDomain>) {
         val entities = AuthorityToUserEntityMapper.fromAggregate(authorities)

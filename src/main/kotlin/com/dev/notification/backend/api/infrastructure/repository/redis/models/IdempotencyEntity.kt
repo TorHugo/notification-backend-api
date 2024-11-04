@@ -9,7 +9,7 @@ data class IdempotencyEntity(
     val status: IdempotencyStatusEnum,
     val result: String? = null,
     val error: String? = null,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
 ) : RedisEntity {
     override fun getEntityKey(): String = key
     override fun getEntityPrefix(): String = prefix

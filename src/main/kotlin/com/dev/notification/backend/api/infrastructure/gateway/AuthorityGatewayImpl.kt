@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class AuthorityGatewayImpl(
-    private val authorityRepository: AuthorityRepository
+    private val authorityRepository: AuthorityRepository,
 ) : AuthorityGateway {
 
     override fun findByName(name: String): AuthorityDomain {

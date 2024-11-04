@@ -14,7 +14,7 @@ class AuthorityToUserEntity(
     val compositeKey: CompositeKey,
 
     @Column(name = "created_at", nullable = false)
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
 )
 
 @Embeddable
@@ -23,5 +23,5 @@ class CompositeKey(
     val userIdentifier: String,
 
     @Column(name = "authority_identifier", nullable = false)
-    val authorityIdentifier: String
+    val authorityIdentifier: String,
 )

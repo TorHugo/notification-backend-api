@@ -10,7 +10,7 @@ data class AuthorityDomain(
     val description: String,
     val active: Boolean,
     val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime?
+    val updatedAt: LocalDateTime?,
 ) : AggregateRoot<UUID>() {
 
     companion object {
@@ -20,7 +20,7 @@ data class AuthorityDomain(
             description: String,
             active: Boolean,
             createdAt: LocalDateTime,
-            updatedAt: LocalDateTime?
+            updatedAt: LocalDateTime?,
         ): AuthorityDomain {
             return AuthorityDomain(
                 IdentifierUtils.byString(identifier),
@@ -28,7 +28,7 @@ data class AuthorityDomain(
                 description,
                 active,
                 createdAt,
-                updatedAt
+                updatedAt,
             )
         }
     }

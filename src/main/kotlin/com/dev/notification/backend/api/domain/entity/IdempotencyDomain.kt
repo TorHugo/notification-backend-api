@@ -8,14 +8,14 @@ data class IdempotencyDomain(
     val status: IdempotencyStatusEnum,
     val result: String? = null,
     val error: String? = null,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
 ) {
     companion object {
         fun create(identifier: String, status: IdempotencyStatusEnum): IdempotencyDomain {
             return IdempotencyDomain(
                 identifier = identifier,
                 status = status,
-                createdAt = LocalDateTime.now()
+                createdAt = LocalDateTime.now(),
             )
         }
 

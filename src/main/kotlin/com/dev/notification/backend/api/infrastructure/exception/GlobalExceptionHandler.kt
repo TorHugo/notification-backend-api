@@ -25,14 +25,14 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleRepositoryException(
         ex: RepositoryException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): DefaultDTO<ExceptionData> {
         logger.error("Repository exception occurred", ex)
         return createErrorResponse(
             status = HttpStatus.INTERNAL_SERVER_ERROR,
             error = "Repository Error",
             message = ex.message,
-            path = request.requestURI
+            path = request.requestURI,
         )
     }
 
@@ -40,14 +40,14 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleDomainException(
         ex: DomainException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): DefaultDTO<ExceptionData> {
         logger.warn("Domain exception occurred", ex)
         return createErrorResponse(
             status = HttpStatus.BAD_REQUEST,
             error = "Domain Error",
             message = ex.message,
-            path = request.requestURI
+            path = request.requestURI,
         )
     }
 
@@ -55,14 +55,14 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleServiceException(
         ex: ServiceException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): DefaultDTO<ExceptionData> {
         logger.warn("Service exception occurred", ex)
         return createErrorResponse(
             status = HttpStatus.BAD_REQUEST,
             error = "Service Error",
             message = ex.message,
-            path = request.requestURI
+            path = request.requestURI,
         )
     }
 
@@ -70,14 +70,14 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleInvalidArgumentException(
         ex: InvalidArgumentException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): DefaultDTO<ExceptionData> {
         logger.warn("Invalid Argument exception occurred", ex)
         return createErrorResponse(
             status = HttpStatus.BAD_REQUEST,
             error = "Invalid Argument Error",
             message = ex.message,
-            path = request.requestURI
+            path = request.requestURI,
         )
     }
 
@@ -85,14 +85,14 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleGatewayException(
         ex: GatewayException,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): DefaultDTO<ExceptionData> {
         logger.warn("Gateway Exception occurred", ex)
         return createErrorResponse(
             status = HttpStatus.INTERNAL_SERVER_ERROR,
             error = "Gateway Error",
             message = ex.message,
-            path = request.requestURI
+            path = request.requestURI,
         )
     }
 
@@ -100,14 +100,14 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleGenericException(
         ex: Exception,
-        request: HttpServletRequest
+        request: HttpServletRequest,
     ): DefaultDTO<ExceptionData> {
         logger.error("Unhandled exception occurred", ex)
         return createErrorResponse(
             status = HttpStatus.INTERNAL_SERVER_ERROR,
             error = "Internal Server Error",
             message = "An unexpected error occurred",
-            path = request.requestURI
+            path = request.requestURI,
         )
     }
 
@@ -115,13 +115,13 @@ class GlobalExceptionHandler {
         status: HttpStatus,
         error: String,
         message: String?,
-        path: String
+        path: String,
     ): DefaultDTO<ExceptionData> = DefaultDTO(
         status = status.value(),
         data = ExceptionData(
             error = error,
             message = message ?: "No additional information available",
-            path = path
-        )
+            path = path,
+        ),
     )
 }

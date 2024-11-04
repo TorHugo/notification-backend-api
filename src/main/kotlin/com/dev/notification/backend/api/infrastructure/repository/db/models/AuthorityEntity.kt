@@ -14,5 +14,5 @@ class AuthorityEntity(
     val description: String,
     val active: Boolean,
     val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime?
+    val updatedAt: LocalDateTime?,
 )

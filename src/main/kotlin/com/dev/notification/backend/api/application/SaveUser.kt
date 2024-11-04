@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class SaveUser(
-    private val userGateway: UserGateway
+    private val userGateway: UserGateway,
 ) {
     fun execute(userDomain: UserDomain) {
         userGateway.save(userDomain)

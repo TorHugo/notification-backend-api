@@ -4,5 +4,5 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class UserSuccessfullyDTO(
     @JsonProperty("identifier")
-    val identifier: String
+    val identifier: String,
 )

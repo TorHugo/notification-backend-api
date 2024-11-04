@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service
 class ProcessIdempotencyImpl(
     val findExistsIdempotency: FindExistsIdempotency,
     val saveIdempotency: SaveIdempotency,
-    val gson: Gson
+    val gson: Gson,
 ) : ProcessIdempotency {
     override fun execute(
         idempotencyKey: String,
         shouldRetry: Boolean,
-        operation: () -> Any
+        operation: () -> Any,
     ): Any {
         val existsIdempotency = findExistsIdempotency.execute(idempotencyKey)
         return when (existsIdempotency?.status) {
@@ -54,7 +54,7 @@ class ProcessIdempotencyImpl(
                 processingKey,
                 result,
                 null,
-                IdempotencyStatusEnum.COMPLETED
+                IdempotencyStatusEnum.COMPLETED,
             )
             result
         } catch (e: Exception) {
@@ -62,7 +62,7 @@ class ProcessIdempotencyImpl(
                 processingKey,
                 null,
                 e.message,
-                IdempotencyStatusEnum.FAILED
+                IdempotencyStatusEnum.FAILED,
             )
             throw e
         }
@@ -71,7 +71,7 @@ class ProcessIdempotencyImpl(
     private fun createProcessingIdempotency(idempotencyKey: String): IdempotencyDomain {
         val processingKey = IdempotencyDomain.create(
             idempotencyKey,
-            IdempotencyStatusEnum.PROCESSING
+            IdempotencyStatusEnum.PROCESSING,
         )
         saveIdempotency.execute(processingKey)
         return processingKey
@@ -81,12 +81,12 @@ class ProcessIdempotencyImpl(
         processingIdempotency: IdempotencyDomain,
         result: T?,
         error: String?,
-        idempotencyStatusEnum: IdempotencyStatusEnum
+        idempotencyStatusEnum: IdempotencyStatusEnum,
     ) {
         val completedKey = processingIdempotency.copy(
             status = idempotencyStatusEnum,
             result = result?.let { gson.toJson(it) },
-            error = error
+            error = error,
         )
         saveIdempotency.execute(completedKey)
     }

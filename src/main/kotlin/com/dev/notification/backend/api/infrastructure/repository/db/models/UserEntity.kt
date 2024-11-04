@@ -19,5 +19,5 @@ class UserEntity(
     val confirmed: Boolean,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime?,
-    val lastAccess: LocalDateTime?
+    val lastAccess: LocalDateTime?,
 )

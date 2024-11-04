@@ -20,14 +20,14 @@ interface AuthenticationAPI {
     @ResponseStatus(HttpStatus.CREATED)
     fun signIn(
         @Valid @RequestBody
-        entry: SignInUserDTO
+        entry: SignInUserDTO,
     ): DefaultDTO<UserSuccessfullyDTO>
 
     @PostMapping("/public/login")
     @ResponseStatus(HttpStatus.OK)
     fun login(
         @Valid @RequestBody
-        entry: LoginUserDTO
+        entry: LoginUserDTO,
     ): ResponseEntity<DefaultDTO<DefaultMessageDTO>>
 
     @PostMapping("/public/logout")

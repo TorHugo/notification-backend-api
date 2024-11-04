@@ -6,7 +6,7 @@ import java.util.*
 data class AuthorityToUserDomain(
     val userIdentifier: UUID,
     val authorityIdentifier: UUID,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
 ) {
     fun getUserIdentifier(): String {
         return userIdentifier.toString()
@@ -19,12 +19,12 @@ data class AuthorityToUserDomain(
     companion object {
         fun create(
             userIdentifier: UUID,
-            authorityIdentifier: UUID
+            authorityIdentifier: UUID,
         ): AuthorityToUserDomain {
             return AuthorityToUserDomain(
                 userIdentifier,
                 authorityIdentifier,
-                createdAt = LocalDateTime.now()
+                createdAt = LocalDateTime.now(),
             )
         }
     }

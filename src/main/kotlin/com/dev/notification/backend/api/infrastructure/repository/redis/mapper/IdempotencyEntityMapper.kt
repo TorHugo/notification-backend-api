@@ -13,7 +13,7 @@ object IdempotencyEntityMapper {
             domain.status,
             domain.result,
             domain.error,
-            domain.createdAt
+            domain.createdAt,
         )
     }
 
@@ -23,7 +23,7 @@ object IdempotencyEntityMapper {
             entity.status,
             entity.result,
             entity.error,
-            entity.createdAt
+            entity.createdAt,
         )
     }
 }

@@ -12,7 +12,7 @@ abstract class RedisTemplateRepository<T : RedisEntity>(
     @Value("\${spring.data.redis.timeout.default}")
     protected val timeInvalidKey: Long,
     val redisTemplate: RedisTemplate<String, String>,
-    val gson: Gson
+    val gson: Gson,
 ) {
     @Suppress("kotlin:S6518")
     fun save(entity: T) {
@@ -21,7 +21,7 @@ abstract class RedisTemplateRepository<T : RedisEntity>(
             identifier(entity.getEntityPrefix(), entity.getEntityKey()),
             value,
             timeInvalidKey,
-            TimeUnit.HOURS
+            TimeUnit.HOURS,
         )
     }
 

@@ -11,7 +11,7 @@ object NotificationEntityMapper {
             domain.subject,
             domain.template,
             domain.getParameters(),
-            domain.createdAt
+            domain.createdAt,
         )
     }
 }

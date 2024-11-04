@@ -10,7 +10,7 @@ object UserToDomainMapper {
             bcryptPassword,
             entry.firstName,
             entry.lastName,
-            false
+            false,
         )
     }
 }

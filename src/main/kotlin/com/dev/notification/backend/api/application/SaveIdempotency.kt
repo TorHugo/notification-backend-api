@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class SaveIdempotency(
-    val idempotencyGateway: IdempotencyGateway
+    val idempotencyGateway: IdempotencyGateway,
 ) {
     fun execute(domain: IdempotencyDomain) {
         idempotencyGateway.save(domain)

@@ -17,5 +17,5 @@ class NotificationEntity(
     val template: String,
     @Column(columnDefinition = "TEXT")
     val parameters: String,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
 )

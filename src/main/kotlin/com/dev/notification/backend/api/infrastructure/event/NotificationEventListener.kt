@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class NotificationEventListener(
-    private val sendNotification: SendNotification
+    private val sendNotification: SendNotification,
 ) {
     private val logger = LoggerFactory.getLogger(NotificationEventListener::class.java)
 

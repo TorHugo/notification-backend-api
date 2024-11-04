@@ -10,7 +10,7 @@ data class UserDetailsImpl(
     @JsonIgnore private val password: String,
     private val active: Boolean,
     private val confirmed: Boolean,
-    private val authorities: Collection<GrantedAuthority>
+    private val authorities: Collection<GrantedAuthority>,
 ) : UserDetails {
 
     override fun getAuthorities(): Collection<GrantedAuthority> = authorities
@@ -38,7 +38,7 @@ data class UserDetailsImpl(
                 password = entity.password,
                 active = entity.active,
                 confirmed = entity.confirmed,
-                authorities = authorityList
+                authorities = authorityList,
             )
     }
 }

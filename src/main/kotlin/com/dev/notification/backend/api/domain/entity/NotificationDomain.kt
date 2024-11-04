@@ -12,7 +12,7 @@ data class NotificationDomain(
     val subject: String,
     val template: String,
     val parameters: List<Parameter>,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
 ) : AggregateRoot<UUID>() {
 
     fun getParameters(): String {
@@ -24,7 +24,7 @@ data class NotificationDomain(
             contact: String,
             subject: String,
             template: String,
-            parameters: List<Parameter>
+            parameters: List<Parameter>,
         ): NotificationDomain {
             return NotificationDomain(
                 identifier = IdentifierUtils.generated(),
@@ -32,7 +32,7 @@ data class NotificationDomain(
                 subject = subject,
                 template = template,
                 parameters = parameters,
-                createdAt = LocalDateTime.now()
+                createdAt = LocalDateTime.now(),
             )
         }
     }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class Logout(
-    private val jwtTokenUtils: JwtTokenUtils
+    private val jwtTokenUtils: JwtTokenUtils,
 ) {
     fun execute(): ResponseCookie {
         return jwtTokenUtils.cleanToken()

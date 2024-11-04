@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class FindExistsIdempotency(
-    val idempotencyGateway: IdempotencyGateway
+    val idempotencyGateway: IdempotencyGateway,
 ) {
     fun execute(identifier: String): IdempotencyDomain? {
         val existsIdempotencyWithIdentifier = idempotencyGateway.findByIdentifier(identifier)

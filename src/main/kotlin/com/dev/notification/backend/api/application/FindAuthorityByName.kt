@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class FindAuthorityByName(
-    private val authorityGateway: AuthorityGateway
+    private val authorityGateway: AuthorityGateway,
 ) {
     fun execute(name: String): AuthorityDomain {
         return authorityGateway.findByName(name)

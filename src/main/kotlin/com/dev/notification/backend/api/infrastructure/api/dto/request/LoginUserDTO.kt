@@ -5,5 +5,5 @@ import jakarta.validation.constraints.NotBlank
 
 class LoginUserDTO(
     @NotBlank val email: String,
-    @Password val password: String
+    @Password val password: String,
 )

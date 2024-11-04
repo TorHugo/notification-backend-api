@@ -16,7 +16,7 @@ object UserEntityMapper {
             confirmed = domain.confirmed,
             createdAt = domain.createdAt,
             updatedAt = domain.updatedAt,
-            lastAccess = domain.lastAccess
+            lastAccess = domain.lastAccess,
         )
     }
 
@@ -32,7 +32,7 @@ object UserEntityMapper {
             confirmed = entity.confirmed,
             createdAt = entity.createdAt,
             updatedAt = entity.updatedAt,
-            lastAccess = entity.lastAccess
+            lastAccess = entity.lastAccess,
         )
     }
 }

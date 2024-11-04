@@ -12,7 +12,7 @@ import org.springframework.web.context.request.ServletRequestAttributes
 @Aspect
 @Component
 class IdempotencyInterceptor(
-    private val processingIdempotency: ProcessIdempotency
+    private val processingIdempotency: ProcessIdempotency,
 ) {
     @Around("@within(org.springframework.web.bind.annotation.RestController)")
     fun intercept(joinPoint: ProceedingJoinPoint): Any {

@@ -9,7 +9,7 @@ object AuthorityToUserEntityMapper {
         val compositeKey = CompositeKey(domain.getUserIdentifier(), domain.getAuthorityIdentifier())
         return AuthorityToUserEntity(
             compositeKey,
-            domain.createdAt
+            domain.createdAt,
         )
     }
 

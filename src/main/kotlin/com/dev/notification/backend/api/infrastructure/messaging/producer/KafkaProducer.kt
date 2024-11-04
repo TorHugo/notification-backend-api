@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class KafkaProducer(
-    val kafkaTemplate: KafkaTemplate<String, String>
+    val kafkaTemplate: KafkaTemplate<String, String>,
 ) {
     protected val logger: Log = LogFactory.getLog(this.javaClass)
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class UserGatewayImpl(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
 ) : UserGateway {
 
     override fun save(user: UserDomain): UserDomain {

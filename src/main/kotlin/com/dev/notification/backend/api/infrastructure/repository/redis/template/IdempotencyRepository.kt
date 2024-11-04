@@ -12,7 +12,7 @@ class IdempotencyRepository(
     @Value("\${spring.data.redis.timeout.default}")
     timeInvalidKey: Long,
     redisTemplate: RedisTemplate<String, String>,
-    gson: Gson
+    gson: Gson,
 ) : RedisTemplateRepository<IdempotencyEntity>(timeInvalidKey, redisTemplate, gson) {
 
     override fun deserialize(json: String, type: Class<IdempotencyEntity>): IdempotencyEntity {

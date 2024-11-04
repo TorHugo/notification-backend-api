@@ -11,5 +11,5 @@ import kotlin.reflect.KClass
 annotation class Password(
     val message: String = "Invalid password",
     val groups: Array<KClass<*>> = [],
-    val payload: Array<KClass<out Payload>> = []
+    val payload: Array<KClass<out Payload>> = [],
 )

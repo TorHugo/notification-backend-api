@@ -11,7 +11,7 @@ object AuthorityEntityMapper {
             entity.description,
             entity.active,
             entity.createdAt,
-            entity.updatedAt
+            entity.updatedAt,
         )
     }
 }

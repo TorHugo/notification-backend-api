@@ -4,5 +4,5 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 class DefaultMessageDTO(
     @JsonProperty("message")
-    val message: String
+    val message: String,
 )

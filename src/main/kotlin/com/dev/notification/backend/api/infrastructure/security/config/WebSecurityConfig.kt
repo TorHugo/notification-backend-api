@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 class WebSecurityConfig(
-    private val authenticationJwtTokenFilter: AuthFilter
+    private val authenticationJwtTokenFilter: AuthFilter,
 ) {
     companion object {
         private val PUBLIC = arrayOf("/auth/**", "/actuator/**")
